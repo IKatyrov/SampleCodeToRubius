@@ -37,20 +37,26 @@ namespace Character.Shadow
 
         public void ChangeToRandomColor()
         {
-            if (Movable.CurrentStep.ChangedColor.HasValue)
+            if (!Movable.CurrentStep.ChangedColor.HasValue)
             {
-                _renderer.material.color = Movable.CurrentStep.ChangedColor.Value;
+                return;
+            }
+            
+            _renderer.material.color = Movable.CurrentStep.ChangedColor.Value;
                 
 #if UNITY_EDITOR
-                string message = $"Двойник {gameObject.name} сменил цвет на тот что был у игрока";
-                _logger.PrintLog(message);
+            string message = $"Двойник {gameObject.name} сменил цвет на тот что был у игрока";
+            _logger.PrintLog(message);
 #endif
-               
-            }
         }
 
         public void ChangeToGreenColor()
         {
+            if (_renderer.material.color.Equals(Color.green))
+            {
+                return;
+            }
+            
             _renderer.material.color = Color.green;
             
 #if UNITY_EDITOR

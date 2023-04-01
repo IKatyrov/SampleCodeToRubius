@@ -50,6 +50,11 @@ namespace Character.Player
 
         public void ChangeToGreenColor()
         {
+            if (_renderer.material.color.Equals(Color.green))
+            {
+                return;
+            }
+            
             _renderer.material.color = Color.green;
             
 #if UNITY_EDITOR
@@ -61,11 +66,10 @@ namespace Character.Player
 
         public void ReturnToStartPosition()
         {
-            transform.position = Vector3.up;
-            transform.rotation = Quaternion.identity;
+            transform.SetPositionAndRotation(Vector3.up, Quaternion.identity);
         }
 
-        public void AddColorStep(Color color)
+        private void AddColorStep(Color color)
         {
             Step lastStep = Movable.CurrentStep;
             
